@@ -14,7 +14,8 @@ st.set_page_config(
     page_icon="🌫️"
 )
 
-API_TOKEN = st.secrets["WAQI_API_TOKEN"]
+API_TOKEN = "fc3fb4c8a94b2d79161bf05afc7915ad5a0a3473"
+
 
 
 
@@ -346,7 +347,8 @@ ward_aqi = simulate_ward_aqi(
     city_aqi,
     ward_info.traffic,
     ward_info.construction,
-    ward_info.industry
+    ward_info.industry,
+    ward
 )
 
 level, icon = classify_pollution(ward_aqi)

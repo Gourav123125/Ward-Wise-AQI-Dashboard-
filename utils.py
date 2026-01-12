@@ -50,25 +50,41 @@ def recommend_actions(ward_aqi, traffic, construction, industry):
 
     return actions
 
-def simulate_ward_aqi(city_aqi, traffic, construction, industry):
+def simulate_ward_aqi(city_aqi, traffic, construction, industry, ward_name=None):
     adjustment = 0
 
     if traffic == "High":
-        adjustment += 20
+        adjustment += 40
     elif traffic == "Medium":
-        adjustment += 10
+        adjustment += 25
     else:
-        adjustment -= 5
+        adjustment += 10
 
     if construction == "Yes":
-        adjustment += 15
+        adjustment += 30
 
     if industry == "Yes":
-        adjustment += 20
+        adjustment += 45
 
     ward_aqi = city_aqi + adjustment
-    return max(ward_aqi, 0)
+
+    # 🔥 Force demo hotspots
+    if ward_name in HIGH_RISK_WARDS:
+        ward_aqi = max(ward_aqi, HIGH_RISK_WARDS[ward_name])
+
+    # Baseline floor
+    if ward_aqi < 80:
+        ward_aqi = 80
+
+    return int(ward_aqi)
+
 
 
 def simulate_pm25(pm25, reduction):
     return round(pm25 * (1 - reduction / 100), 1)
+HIGH_RISK_WARDS = {
+    "Karol Bagh": 180,
+    "Chandni Chowk": 220,
+    "Okhla": 260
+}
+
