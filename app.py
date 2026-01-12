@@ -348,7 +348,6 @@ ward_aqi = simulate_ward_aqi(
     ward_info.get("traffic", "Low"),
     ward_info.get("construction", "No"),
     ward_info.get("industry", "No"),
-    ward_name
 )
 
 level, icon = classify_pollution(ward_aqi)
