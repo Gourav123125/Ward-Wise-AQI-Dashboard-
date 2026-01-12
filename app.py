@@ -345,10 +345,10 @@ pm25, pm10, no2, city_aqi, timestamp = fetch_aqi()
 
 ward_aqi = simulate_ward_aqi(
     city_aqi,
-    ward_info.traffic,
-    ward_info.construction,
-    ward_info.industry,
-    ward
+    ward_info.get("traffic", "Low"),
+    ward_info.get("construction", "No"),
+    ward_info.get("industry", "No"),
+    ward_name
 )
 
 level, icon = classify_pollution(ward_aqi)
